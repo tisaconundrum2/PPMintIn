@@ -5,19 +5,19 @@
   Feel free to distribute but keep this header here
 */
 #include "arduino.h"
-#include <PinChangeInt.h>
-#include <PPMintIn.h>
+#include "ppmintin.h"
+#include "PinChangeInt.h"
 
-PPMintIn::PPMintIn(int pin) {
-    pinMode(pin, INPUT);
+PPMintIn::PPMintIn(int pin)
+{
+    pinMode(pin, INPUT);\
     digitalWrite(pin, HIGH);
-    _pin = pin;
 }
 
 void PPMintIn::rising(){
-    PPMintIn::latest_interrupted_pin=PCintPort::arduinoPin;
+    PPMintIn::latest_interrupted_pin = PCintPort::arduinoPin;
     PCintPort::attachInterrupt(latest_interrupted_pin, &rising, RISING);
-    PPMintIn::pwm_value = micros()-PPMintIn::prev_time;
+    PPMintIn::pwm_value = micros()-PPMintIn.prev_time;
 }
 
 void PPMintIn::falling() {
@@ -26,8 +26,10 @@ void PPMintIn::falling() {
     PPMintIn::pwm_value = micros()-PPMintIn::prev_time;
 }
 
-void PPMintIn::begin() {
-	PCintPort::attachInterrupt(pinIn[i], &rising, RISING);	
+void PPMintIn::begin(){
+    PCintPort::attachInterrupt(pinIn[i], &rising, RISING);
 }
 
-
+void PPMintIn::getSignal(){
+    return(PPMintIn::pwm_value);
+}
