@@ -6,9 +6,9 @@ PPMintIn chan3(A2);
 
 setup(){
     Serial.begin(115200);
-    chan1.init();
-    chan2.init();
-    chan3.init();
+    chan1.begin();
+    chan2.begin();
+    chan3.begin();
 }
 
 loop(){
