@@ -15,20 +15,18 @@
 #endif
 #include "PinChangeInt.h"
 
-class PPMintIn
-{
-
+class PPMintIn{
 public:
     PPMintIn(int pin);
     void begin();
     void getSignal();
-    void rising();
-    void falling();
-
-private:
+    int _pin;
     volatile int pwm_value;
     volatile int prev_time;
     uint8_t latest_interrupted_pin;
+private:
+    void rising();
+    void falling();
 };
 
 #endif // PPMINTIN_H
